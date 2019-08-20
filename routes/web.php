@@ -58,3 +58,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/admin', 'AdminController@index'); // middleware ditulis pada controller
+
+// Route::get('/admin', 'AdminController@index')->middleware('role:admin'); // middleware ditulis pada route
+
+// ! route group berdasarkan middleware
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/admin', 'AdminController@index');
+    // simpan route lainnya disini
+});
